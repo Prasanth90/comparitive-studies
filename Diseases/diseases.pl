@@ -51,17 +51,15 @@ disease('Fatigue(tiredness)','Influenza').
 disease('vomiting and diarrhea','Influenza').
 
 
-find_match([], _).
-find_match([H|T], L) :- 
-		disease(H,Output),
-		append([Output], L, K),
-		find_match(T, K).
+find_match([]).
+find_match([H|T]) :- 
+		disease(H,Output),nl,
+		write(Output),
+		find_match(T).
 		
 
 find_disease:-
 		write('Enter the Symptoms separated by Comma (,)'),nl,
 		read_line_to_codes(user_input,Cs), atom_codes(A, Cs), atomic_list_concat(L, ',', A),
-		K = [],
-		find_match(L, K),
-		write(K).
+		find_match(L).
 		
