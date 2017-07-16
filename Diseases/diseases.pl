@@ -1,4 +1,3 @@
-	
 disease('missed_period','Pregnancy').
 disease('mild_cramping_and_spotting','Pregnancy').
 disease('fatigue','Pregnancy').
