@@ -1,48 +1,67 @@
-disease('missed_period','Pregnancy').
-disease('mild_cramping_and_spotting','Pregnancy').
-disease('fatigue','Pregnancy').
-disease('nausea','Pregnancy').
-disease('tingling_or_aching_breasts','Pregnancy').
-disease('frequent_urination','Pregnancy').
-disease('bloating','Pregnancy').
-disease('motion_sickness','Pregnancy').
-disease('mood_swings','Pregnancy').
-disease('temperature_changes','Pregnancy').
-disease('high_blood_pressure','Pregnancy').
-disease('extreme_fatigue_and_heartburn','Pregnancy').
-disease('faster_heartbeat','Pregnancy').
-disease('breast_and_nipple_changes','Pregnancy').
-disease('acne','Pregnancy').
-disease('noticeable_weight_gain','Pregnancy').
-disease('pregnancy_glow','Pregnancy').
+disease('Missed period','Pregnancy').
+disease('Mild cramping and spotting','Pregnancy').
+disease('Fatigue','Pregnancy').
+disease('Nausea','Pregnancy').
+disease('Tingling breasts','Pregnancy').
+disease('Aching breasts','Pregnancy').
+disease('Frequent Urination','Pregnancy').
+disease('Bloating','Pregnancy').
+disease('Motion sickness','Pregnancy').
+disease('Mood swings','Pregnancy').
+disease('Temperature changes','Pregnancy').
+disease('High blood pressure','Pregnancy').
+disease('Extreme fatigue and heartburn','Pregnancy').
+disease('Faster heartbeat','Pregnancy').
+disease('Breast and nipple changes','Pregnancy').
+disease('Acne','Pregnancy').
+disease('Noticeable weight gain','Pregnancy').
+disease('Pregnancy glow','Pregnancy').
 disease('Fever','Pregnancy').
 disease('Chills','AIDS').
 disease('Rash','AIDS').
-disease('Night_sweats','AIDS').
-disease('Muscle_aches','AIDS').
-disease('Sore_throat','AIDS').
+disease('Night sweats','AIDS').
+disease('Muscle aches','AIDS').
+disease('Sore throat','AIDS').
 disease('Fatigue','AIDS').
-disease('Swollen_lymph_nodes','AIDS').
-disease('Mouth_ulcers','AIDS').
-disease('fever','Hepatitis_C').
-disease('feeling_tired','Hepatitis_C').
-disease('poor_appetite','Hepatitis_C').
-disease('nausea_or_vomiting','Hepatitis_C').
-disease('pain_in_your_stomach','Hepatitis_C').
-disease('joint_or_muscle_pain','Hepatitis_C').
-disease('abnormalities_in_urine_or_bowel_movements','Hepatitis_C').
-disease('a_yellowing_in_your_eyes_or_skin','Hepatitis_C').
-disease('Fever_or_feeling_feverish/chills','Influenza').
+disease('Swollen lymph nodes','AIDS').
+disease('Mouth ulcers','AIDS').
+disease('Fever','Hepatitis C').
+disease('Feeling Tired','Hepatitis C').
+disease('Poor Appetite','Hepatitis C').
+disease('Nausea','Hepatitis C').
+disease('Vomiting','Hepatitis C').
+disease('Stomach pain','Hepatitis C').
+disease('Joint pain','Hepatitis C').
+disease('Muscle pain','Hepatitis C').
+disease('Abnormalities in urine','Hepatitis C').
+disease('Abnormalities in bowel movements','Hepatitis C').
+disease('A yellowing in your eyes','Hepatitis C').
+disease('A yellowing in your skin','Hepatitis C').
+disease('Fever','Influenza').
+disease('Chills','Influenza').
+disease('Feeling feverish','Influenza').
 disease('Cough','Influenza').
-disease('Sore_throat','Influenza').
-disease('Runny_or_stuffy_nose','Influenza').
-disease('Muscle_or_body_aches','Influenza').
+disease('Sore throat','Influenza').
+disease('Runny nose','Influenza').
+disease('Stuffy nose','Influenza').
+disease('Muscle or body aches','Influenza').
+disease('Body aches','Influenza').
 disease('Headaches','Influenza').
-disease('Fatigue_(tiredness)','Influenza').
-disease('vomiting_and_diarrhea','Influenza').
+disease('Fatigue(tiredness)','Influenza').
+disease('vomiting and diarrhea','Influenza').
+
+
+find_match([], _).
+find_match([H|T], L) :- 
+		disease(H,Output),
+		append([Output], L, K),
+		find_match(T, K).
+		
 
 find_disease:-
-		write('Enter_the_Symptom'),nl,
-		read(Input),nl,
-		disease(Input,Output),nl,
-		write(Output),nl,!.
+		write('Enter the Symptoms separated by Comma (,)'),nl,
+		read_line_to_codes(user_input,Cs), atom_codes(A, Cs), atomic_list_concat(L, ',', A),
+		K = [],
+		find_match(L, K),
+		write(K).
+		
