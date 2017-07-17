@@ -50,16 +50,14 @@ disease('Headaches','Influenza').
 disease('Fatigue(tiredness)','Influenza').
 disease('vomiting and diarrhea','Influenza').
 
-
-find_match([]).
-find_match([H|T]) :- 
-		disease(H,Output),nl,
-		write(Output),
-		find_match(T).
-		
-
-find_disease:-
-		write('Enter the Symptoms separated by Comma (,)'),nl,
-		read_line_to_codes(user_input,Cs), atom_codes(A, Cs), atomic_list_concat(L, ',', A),
-		find_match(L).
-		
+find_disease(M):-
+	findall(X, (member(Y, M), disease(Y, X)), Xs),
+	length(Xs,N),
+	N > 0 -> 
+	sort(Xs, K),nl,
+	write("Hey The following are the diseases which you might be affected with"),nl,
+	write(K),nl
+	;
+	nl,
+	write("Hey, Sorry!!!, We havent found a diagnosis based on your symptoms"),
+	fail.
