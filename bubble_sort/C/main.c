@@ -29,30 +29,32 @@ int main(int argc, char *argv[])
 	printf("How many numbers would you like to enter?\n");
 	scanf("%d", &n);
 
-	int a[n];
+	int array[n];
 	for (int i = 0 ; i != n ; i++) {
 	    printf("Enter number %d: ", i+1);
-	    scanf("%d", &a[i]);
+	    scanf("%d", &array[i]);
 	}
+
 	
 	int temp = 0;
 
-	for(int i= 0 ; i != n-1 ; i++) 
+	for (int i = 0 ; i <  n - 1 ; i++)
 	{
-		for(int j = i+1 ; j!= n; j++)
+		for (int j = 0 ; j < n - i - 1; j++)
 		{
-			if(a[i] > a[j])
+			if (array[j] > array[j+1]) /* For decreasing order use < */
 			{
-				temp = a[i];
-				a[i] = a[j];
-				a[j] = temp;
+				temp      = array[j];
+				array[j]   = array[j+1];
+				array[j+1] = temp;
 			}
 		}
 	}
+
 	printf("The Sorted elements are: ");
-	for(int i = 0 ; i!= n; i++)
+	for(int i = 0 ; i< n; i++)
 	{
-		printf("%d ", a[i]);
+		printf("%d ", array[i]);
 	}
 
     return 0;

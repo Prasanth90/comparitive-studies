@@ -1,8 +1,10 @@
-abc([X, Y| Rest], [Y, X| Rest]):- X>Y.
-
-abc([Z | L1], [Z| L2]) :- abc(L1,L2).
-
-
-bubble(List, Sort) :- abc(List, List2), !,
-bubble(List2, Sort).
-bubble(Sor, Sor). 
+gt(X,Y) :- X > Y.
+bubblesort(List0, List) :-
+        (   swap(List0, List1) ->
+            bubblesort(List1, List)
+        ;   List0 = List
+        ).
+swap([X,Y|Rest], [Y,X|Rest]) :-   % Swap first two elements
+	gt(X,Y).
+swap([Z|Rest], [Z|Rest1]) :-      % Swap elements in tail
+	swap(Rest, Rest1).
